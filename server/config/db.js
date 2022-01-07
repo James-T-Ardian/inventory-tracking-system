@@ -1,7 +1,9 @@
 require('dotenv').config()
+
+// NodeJS external package that allows for a connection to a mysql database
 const mysql = require("mysql2")
 
-// Connect to database
+// Connects to a mysql database using appropriate credentials.
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

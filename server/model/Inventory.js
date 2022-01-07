@@ -1,35 +1,34 @@
 const mysql = require("../config/db")
 
-// Interact with database's "inventory" table
+// Inventory class is a collection of functions to interact with mysql database's "inventory" table.
 //
-// Note:        - warehouse column can only have predetermined values ('Vancouver', 'Toronto', 'Calgary', 'Montreal', 'Halifax')
+// Note: - warehouse column can only have predetermined values ('Vancouver', 'Toronto', 'Calgary', 'Montreal', 'Halifax').
 //
-// Error codes: - Duplicate entry error no: 1062
-//              - Incorrect last_updated date: 1292
-//              - Warehouse not one of allowed values: 1265
-
+// Relevant error codes: - Duplicate entry error no: 1062
+//                       - Warehouse not one of allowed values: 1265 <= Can probably be handled in front-end, but handle in server just in case
+//                       - item_name exceeds maximum of 45 characters: 1406
 class Inventory {
-    getItems = async ()=>{
+    static getItems = async ()=>{
         const sql = "SELECT * FROM inventory"
         const [result, _] = await mysql.execute(sql, [])
         return result
     }
 
-    insertItem = async (item_name, item_count, warehouse, last_updated)=>{
+    static insertItem = async (itemName, itemCount, warehouse, lastUpdated)=>{
         const sql = "INSERT INTO inventory(item_name, item_count, warehouse, last_updated) VALUES (?, ?, ?, ?)"
-        const [result, _] = await mysql.execute(sql, [item_name, item_count, warehouse, last_updated])
+        const [result, _] = await mysql.execute(sql, [itemName, itemCount, warehouse, lastUpdated])
         return result
     }
 
-    updateItem = async(old_item_name, old_warehouse, item_name, item_count, warehouse, last_updated)=>{
-        const sql = "UPDATE inventory SET item_name = ?, item_count = ?, warehouse = ?, last_updated = ? WHERE item_name = ? AND warehouse = ?"
-        const [result, _] = await mysql.execute(sql, [item_name, item_count, warehouse, last_updated, old_item_name, old_warehouse])
+    static updateItem = async(itemID, itemCount, warehouse, lastUpdated)=>{
+        const sql = "UPDATE inventory SET item_count = ?, warehouse = ?, last_updated = ? WHERE item_id = ?"
+        const [result, _] = await mysql.execute(sql, [itemCount, warehouse, lastUpdated, itemID])
         return result
     }
 
-    deleteItem = async(item_name, warehouse)=>{
-        const sql = "DELETE FROM inventory WHERE item_name = ? AND warehouse = ?"
-        const [result, _] = await mysql.execute(sql, [item_name, warehouse])
+    static deleteItem = async(itemID)=>{
+        const sql = "DELETE FROM inventory WHERE item_id = ?"
+        const [result, _] = await mysql.execute(sql, [itemID])
         return result
     }
 }
