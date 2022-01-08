@@ -1,8 +1,9 @@
 const Inventory = require('../model/Inventory')
 const ApiError = require('../error/ApiError')
+const {Parser} = require('json2csv')
 
 //
-// File holds all controller functions for inventoryRoutes.
+// File holds all controller functions (or as Express names it: RequestHandler functions) for inventoryRoutes.
 //
 
 const getInventoryItems = (req, res, next)=>{
@@ -103,9 +104,26 @@ const deleteInventoryItem = (req, res, next)=>{
         })
 }
 
+const getInventoryItemsAsCSV = (req, res, next)=>{
+    
+    Inventory.getItems()
+        .then((result)=>{
+            const json2csv = new Parser();
+            const csv = json2csv.parse(result);
+            res.status(200)
+            res.header('Content-Type', 'text/csv');
+            res.attachment("inventory.csv");
+            return res.send(csv);
+        }).catch((err)=>{
+            next(ApiError.internalError())
+            return 
+        })
+}
+
 module.exports = {
     getInventoryItems,
     postInventoryItem,
     updateInventoryItem,
-    deleteInventoryItem
+    deleteInventoryItem,
+    getInventoryItemsAsCSV
 }

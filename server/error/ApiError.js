@@ -1,6 +1,7 @@
 // ApiError class is to simplify error handling by putting the most important
 // information about an error unto a single object.
 class ApiError {
+    
     constructor(code, message){
         this.code = code
         this.message = message

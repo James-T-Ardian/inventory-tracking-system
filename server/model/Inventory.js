@@ -8,8 +8,13 @@ const mysql = require("../config/db")
 //                       - Warehouse not one of allowed values: 1265 <= Can probably be handled in front-end, but handle in server just in case
 //                       - item_name exceeds maximum of 45 characters: 1406
 class Inventory {
+    
     static getItems = async ()=>{
-        const sql = "SELECT * FROM inventory"
+        // Ordering by item_id in descending order will make it so that the most recent 
+        // created items are at top and updates to inventory items do not change the 
+        // order of the list
+        const sql = "SELECT * FROM inventory ORDER BY item_id DESC"
+
         const [result, _] = await mysql.execute(sql, [])
         return result
     }

@@ -4,10 +4,15 @@ const express = require('express')
 const router = express.Router()
 
 // Controller functions initialization.
-const {getInventoryItems, postInventoryItem, updateInventoryItem, deleteInventoryItem} = require('../controller/inventoryController')
+const {getInventoryItems, 
+    postInventoryItem, 
+    updateInventoryItem, 
+    deleteInventoryItem, 
+    getInventoryItemsAsCSV} = require('../controller/inventoryController')
 
-// Assigns controller functions based on right-most relative path and http method.
+// Assigns controller functions based on http method and right-most relative path.
 router.get('/', getInventoryItems)
+router.get('/csv', getInventoryItemsAsCSV)
 router.post('/', postInventoryItem)
 router.put('/:itemID', updateInventoryItem)
 router.delete('/:itemID', deleteInventoryItem)

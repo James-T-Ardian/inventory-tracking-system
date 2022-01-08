@@ -11,7 +11,7 @@ const cors = require('cors')
 // Middlewares used.
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:3006",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))
@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended: true}))
 const inventoryRoutes = require('./routes/inventoryRoutes')
 const apiErrorHandler = require('./error/apiErrorHandler')
 
-// Direct to routes based on left-most relative pathname. If left-most relative pathname does have
+// Directs to specific routes based on left-most relative pathname. If left-most relative pathname does have
 // routes attached to it, then 404 error will be sent back by apiErrorHandler. 
 app.get('/', (req, res)=>{
     res.redirect('/inventory')
