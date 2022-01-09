@@ -1,0 +1,14 @@
+.specifications-container{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    gap: 1em;
+    align-items: center;
+
+    
+}
+
+.specification{
+    width: 300px;
+    text-align: center;
+}

@@ -13,8 +13,7 @@ class Inventory {
         // Ordering by item_id in descending order will make it so that the most recent 
         // created items are at top and updates to inventory items do not change the 
         // order of the list
-        const sql = "SELECT * FROM inventory ORDER BY item_id DESC"
-
+        const sql = "SELECT item_name, item_count, warehouse, last_updated FROM inventory ORDER BY item_id DESC"
         const [result, _] = await mysql.execute(sql, [])
         return result
     }
