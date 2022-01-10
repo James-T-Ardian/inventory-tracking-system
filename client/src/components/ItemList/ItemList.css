@@ -1,8 +1,11 @@
-.item-list-container{
+#item-list-container{
     margin-top: 10vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #server-message{
-    text-align: center;
     margin-bottom: 1em;
 }
