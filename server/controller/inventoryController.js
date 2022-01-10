@@ -5,6 +5,9 @@ const {Parser} = require('json2csv')
 //
 // File holds all controller functions (or as Express names it: RequestHandler functions) for inventoryRoutes.
 //
+// These functions are in the form of a NodeJS request handler. For more information regarding request handlers 
+// and how NodeJS handles HTTP transfers please refer to: https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/
+//
 
 const getInventoryItems = (req, res, next)=>{
     Inventory.getItems()
@@ -24,7 +27,13 @@ const postInventoryItem = (req, res, next)=>{
         return
     }
 
-    // Gets current date in yyyy-mm-dd format.
+    // Checks if itemCount is int or not so that errorcode 1265 only corresponds to bad warehouse input
+    if(/^-?\d+$/.test(itemCount) == false){
+        next(ApiError.badRequest("Item count must be an integer"))
+        return
+    }
+
+    // Gets current date in yyyy-mm-dd format. We let system handle filling the lastUpdated parameter of Inventory.insertItem
     let currDate = new Date()
     const offset = currDate.getTimezoneOffset()
     currDate = new Date(currDate.getTime() - (offset*60*1000))
@@ -32,7 +41,7 @@ const postInventoryItem = (req, res, next)=>{
 
     Inventory.insertItem(itemName, itemCount, warehouse, currDate)
         .then((result)=>{
-            return res.status(200).json({msg: "item has been successfully created"})
+            return res.status(200).json({msg: "Item has been successfully created"})
         }).catch((err)=>{
             if(err.errno == 1062){
                 next(ApiError.conflict("An item with the same name and warehouse combination already exists"))
@@ -58,7 +67,13 @@ const updateInventoryItem = (req, res, next) => {
         return
     }
 
-    // Gets current date in yyyy-mm-dd format.
+    // Checks if itemCount is int or not so that errorcode 1265 only corresponds to bad warehouse input
+    if(/^-?\d+$/.test(itemCount) == false){
+        next(ApiError.badRequest("Item count must be an integer"))
+        return
+    }
+
+    // Gets current date in yyyy-mm-dd format. We let system handle filling the lastUpdated parameter of Inventory.updateItem
     let currDate = new Date()
     const offset = currDate.getTimezoneOffset()
     currDate = new Date(currDate.getTime() - (offset*60*1000))
@@ -70,7 +85,7 @@ const updateInventoryItem = (req, res, next) => {
                 next(ApiError.resourceNotFound("Item does not exists"))
                 return
             } else {
-                return res.status(200).json({msg: "item has been successfully updated"})
+                return res.status(200).json({msg: "Item has been successfully updated"})
             }
         }).catch((err)=>{
             if(err.errno == 1062){
@@ -96,7 +111,7 @@ const deleteInventoryItem = (req, res, next)=>{
                 next(ApiError.resourceNotFound("Item does not exists"))
                 return
             } else {
-                return res.status(200).json({msg: "item has been successfully deleted"})
+                return res.status(200).json({msg: "Item has been successfully deleted"})
             }
         }).catch((err)=>{
             next(ApiError.internalError())

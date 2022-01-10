@@ -1,6 +1,7 @@
 const express = require('express')
 
-// Allows for use of ExpressJS routing framework.
+// Allows for use of ExpressJS routing framework. For more information regarding
+// how ExpressJS routing works: https://expressjs.com/en/guide/routing.html
 const router = express.Router()
 
 // Controller functions initialization.
