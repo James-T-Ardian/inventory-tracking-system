@@ -1,4 +1,4 @@
-Development code for inventory-tracking-system website.
+This repository holds the development code for inventory-tracking-system website.
 
 Deployment code for client folder: https://github.com/James-T-Ardian/inventory-tracking-system-client-deploy
 
