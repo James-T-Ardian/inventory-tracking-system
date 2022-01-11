@@ -2,7 +2,7 @@ This repository holds the development code for inventory-tracking-system website
 
 Deployment code for client folder: https://github.com/James-T-Ardian/inventory-tracking-system-client-deploy
 
-Deployment code for server : NONE (Deployment code for server has heroku mysql credentials out in the open. If an employer wants 
+Deployment code for server : NOT PUBLISHED (Deployment code for server has heroku mysql credentials out in the open. If an employer wants 
                             the server deployment code then please email me at: jamesardian01@gmail.com)
 
 Description on difference between development and deployment code for server:
