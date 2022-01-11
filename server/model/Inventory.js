@@ -45,7 +45,7 @@ class Inventory {
         return result
     }
 
-    // Parameters: - itemID (INT): value of item_id of the item we want to delete
+    // Parameters: - itemID (int): value of item_id of the item we want to delete
     //
     // Return: delete row in "inventory table" with item_id = itemID
     static deleteItem = async(itemID)=>{

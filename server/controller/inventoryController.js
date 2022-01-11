@@ -23,7 +23,12 @@ const postInventoryItem = (req, res, next)=>{
     const {itemName, itemCount, warehouse} = req.body
 
     if(itemName == undefined || itemCount == undefined || warehouse == undefined){
-        next(ApiError.badRequest("Request body must contain itemName, itemCount and warehouse variable with non-undefined values"))
+        next(ApiError.badRequest("ItemName, itemCount and/or warehouse variable must not have undefined values"))
+        return
+    }
+
+    if(itemName == "" || itemCount == "" || warehouse == ""){
+        next(ApiError.badRequest("ItemName, itemCount and/or warehouse variable must not be empty"))
         return
     }
 
@@ -63,7 +68,12 @@ const updateInventoryItem = (req, res, next) => {
     const {itemID} = req.params
 
     if(itemCount == undefined || warehouse == undefined){
-        next(ApiError.badRequest("Request body must contain itemCount and warehouse variable with non-undefined values"))
+        next(ApiError.badRequest("ItemCount and/or warehouse variable must not have undefined values"))
+        return
+    }
+
+    if(itemCount == "" || warehouse == ""){
+        next(ApiError.badRequest("ItemCount and/or warehouse variable must not be empty"))
         return
     }
 

@@ -9,7 +9,7 @@ const axios = require("axios")
 
 const ItemList = () => {
     const [items, setItems] = useState([])
-    const [serverMessage, setServerMessage] = useState("")
+    const [serverMessage, setServerMessage] = useState("Welcome to the inventory-tracking-system website")
     
     useEffect(()=>{
         axios.get('http://localhost:3000/inventory')
@@ -24,7 +24,7 @@ const ItemList = () => {
         axios({
             url: 'http://localhost:3000/inventory/csv',
             method: 'GET',
-            responseType: 'blob', // important
+            responseType: 'blob',
         }).then((response) => {
             setServerMessage("Obtained CSV file")
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -44,7 +44,7 @@ const ItemList = () => {
             <button onClick={handleGetCSV}>Get list as CSV</button>
             <ItemCreator parentSetServerMessage = {setServerMessage}></ItemCreator>
             <div id="server-message">Server Message: <b>{serverMessage}</b></div>
-            <Item buttonVisibility = "hidden" specifications={["Item name", "Item Count", "Warehouse Location", "Last Updated"]}></Item>
+            <Item buttonVisibility = "hidden" specifications={["item_name", "item_count", "warehouse", "last_updated"]}></Item>
             {items.map((item)=>{
                 const specs = [item["item_name"], item["item_count"], item["warehouse"], item["last_updated"]]
                 return <Item parentSetServerMessage = {setServerMessage} key = {item["item_id"]} itemID = {item["item_id"]} specifications={specs}></Item>

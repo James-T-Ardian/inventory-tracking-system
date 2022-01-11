@@ -31,9 +31,9 @@ const ItemCreator = (props) => {
 
     return (
         <div id="item-creator-container">
-            <input type="text" className='specification' value={itemName} onChange={handleSpecChange(setItemName)} placeholder='Item Name'></input>
-            <input type="text" className='specification' value={itemCount} onChange={handleSpecChange(setItemCount)} placeholder='Item Count'></input>
-            <input type="text" className='specification' value={warehouse} onChange={handleSpecChange(setWarehouse)} placeholder='Warehouse'></input>
+            <input type="text" className='specification' value={itemName} onChange={handleSpecChange(setItemName)} placeholder='item_name'></input>
+            <input type="text" className='specification' value={itemCount} onChange={handleSpecChange(setItemCount)} placeholder='item_count'></input>
+            <input type="text" className='specification' value={warehouse} onChange={handleSpecChange(setWarehouse)} placeholder='warehouse'></input>
             <button onClick={handleCreateItemClick}>Create Item</button>
         </div>
     );
