@@ -6,8 +6,8 @@ Deployment code for server : NONE (Deployment code for server has heroku mysql c
                             the server deployment code then please email me at: jamesardian01@gmail.com)
 
 Description on difference between development and deployment code for server:
-    1. db.js has heroku mysql credentials
-    2. "require('dotenv').config()" in db.js and server.js deleted
-    3. cors origin parameter in server.js is changed to deployed website's url instead of local host 
+1. db.js has heroku mysql credentials
+2. "require('dotenv').config()" in db.js and server.js deleted
+3. cors origin parameter in server.js is changed to deployed website's url instead of local host 
 
 Deployed website: https://inventory-tracking-system.netlify.app/
