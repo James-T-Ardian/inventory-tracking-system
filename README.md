@@ -10,4 +10,4 @@ Description on difference between development and deployment code for server:
 2. "require('dotenv').config()" in db.js and server.js deleted
 3. cors origin parameter in server.js is changed to deployed website's url instead of local host 
 
-Deployed website: https://inventory-tracking-system.netlify.app/
+Deployed website: https://inventory-tracking-system.netlify.app/ (CLICK HERE TO ACCESS WEBSITE !!!!!!!!!)
